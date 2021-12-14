@@ -1,0 +1,28 @@
+CREATE DATABASE employeedb
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+
+CREATE TYPE public.gender_enum_type AS ENUM
+    ('MALE', 'FEMALE');
+
+ALTER TYPE public.gender_enum_type
+    OWNER TO postgres;
+
+CREATE TABLE public.employee
+(
+    employee_id bigint NOT NULL,
+    first_name character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    last_name character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    department_id bigint,
+    job_title character varying(50) COLLATE pg_catalog."default",
+    gender gender_enum_type,
+    date_of_birth date,
+    CONSTRAINT employee_pkey PRIMARY KEY (employee_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.employee
+    OWNER to postgres;
