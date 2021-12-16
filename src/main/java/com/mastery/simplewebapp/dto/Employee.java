@@ -1,27 +1,48 @@
 package com.mastery.simplewebapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mastery.simplewebapp.dto.Enum.Gender;
+import com.mastery.simplewebapp.dto.Enum.SQLEnumType;
 import com.mastery.simplewebapp.util.annotahion.NotNullOrEmptyData;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "employeeId")
+@Entity
+@TypeDef(name = "pgsql_enum", typeClass = SQLEnumType.class)
+@Table(name = "employee")
 public class Employee {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private Long employeeId;
 
     @NotNullOrEmptyData
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
     @NotNullOrEmptyData
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Column(name = "department_id")
     private Long departmentId;
 
+    @Column(name = "job_title")
     private String jobTitle;
 
-    private Gender gender = Gender.MALE;
+    @Column(name = "gender", columnDefinition = "gender_enum_type")
+    @Type( type = "pgsql_enum" )
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
+    @Column(name = "date_of_birth")
     private Date birthDate;
 
     public Employee() {
@@ -44,7 +65,6 @@ public class Employee {
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
-
 
     public String getFirstName() {
         return firstName;
