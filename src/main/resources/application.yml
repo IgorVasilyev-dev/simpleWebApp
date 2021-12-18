@@ -11,4 +11,12 @@ spring:
       minimum-idle: 5
       auto-commit: false
       maximum-pool-size: 20
-
+  jpa:
+    generate-ddl: false
+    show_sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        hbm2ddl: none
+        entitymanager:
+          packagesToScan: com.mastery.simplewebapp.dto

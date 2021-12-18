@@ -37,7 +37,7 @@ public class Employee {
     @Column(name = "job_title")
     private String jobTitle;
 
-    @Column(name = "gender", columnDefinition = "gender_enum_type")
+    @Column(name = "gender")
     @Type( type = "pgsql_enum" )
     @Enumerated(EnumType.STRING)
     private Gender gender;

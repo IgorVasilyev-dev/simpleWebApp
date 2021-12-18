@@ -4,3 +4,5 @@
 
 <2.0.1 - mastery>
 В реализации Main App было использовано Java 8, Maven,Spring Boot, Spring DATA(Hibernate ORM, JPA), PostgreSQL.
+
+Тестирование: Unit-тесты + интеграционные(использовалась база HSQL in memory, junit и Mockito)

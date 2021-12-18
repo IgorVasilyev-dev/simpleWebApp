@@ -18,7 +18,7 @@ public class SQLEnumType extends  org.hibernate.type.EnumType<Gender>{
             st.setNull( index, Types.OTHER );
         }
         else {
-            st.setObject(index, value, Types.OTHER);
+            st.setObject(index, value.toString(), Types.OTHER);
         }
     }
 
