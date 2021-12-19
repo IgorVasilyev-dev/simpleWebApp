@@ -1,0 +1,9 @@
+CREATE TABLE public.employee(employee_id bigint NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1),
+    first_name character varying(50) NOT NULL,
+    last_name character varying(50) NOT NULL,
+    department_id bigint,
+    job_title character varying(50),
+    gender character varying(6),
+    date_of_birth date,
+    CONSTRAINT employee_pkey PRIMARY KEY (employee_id));
+

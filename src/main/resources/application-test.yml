@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.hsqldb.jdbcDriver
+    url: jdbc:hsqldb:mem:test;sql.syntax_pgs=true;
+    username: sa
+    password:

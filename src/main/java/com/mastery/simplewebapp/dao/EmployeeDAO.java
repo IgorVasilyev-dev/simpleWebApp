@@ -33,9 +33,13 @@ public class EmployeeDAO implements IDao<Employee> {
                 e.setEmployeeId(rs.getLong("employee_id"));
                 e.setFirstName(rs.getString("first_name"));
                 e.setLastName(rs.getString("last_name"));
-                e.setDepartmentId(rs.getObject("department_id", Long.class));
+                if(rs.getString("department_id") != null) {
+                    e.setDepartmentId(rs.getObject("department_id", Long.class));
+                }
                 e.setJobTitle(rs.getString("job_title"));
-                e.setGender(Gender.valueOf(rs.getString("gender")));
+                if(rs.getString("gender") != null) {
+                    e.setGender(Gender.valueOf(rs.getString("gender")));
+                }
                 e.setBirthDate(rs.getDate("date_of_birth"));
                 employeeOptional = Optional.of(e);
             }
@@ -60,9 +64,13 @@ public class EmployeeDAO implements IDao<Employee> {
                 e.setEmployeeId(rs.getLong("employee_id"));
                 e.setFirstName(rs.getString("first_name"));
                 e.setLastName(rs.getString("last_name"));
-                e.setDepartmentId(rs.getObject("department_id", Long.class));
+                if(rs.getString("department_id") != null) {
+                    e.setDepartmentId(rs.getObject("department_id", Long.class));
+                }
                 e.setJobTitle(rs.getString("job_title"));
-                e.setGender(Gender.valueOf(rs.getString("gender")));
+                if(rs.getString("gender") != null) {
+                    e.setGender(Gender.valueOf(rs.getString("gender")));
+                }
                 e.setBirthDate(rs.getDate("date_of_birth"));
                 list.add(e);
             }
@@ -78,17 +86,20 @@ public class EmployeeDAO implements IDao<Employee> {
     public Employee addEmployee(Employee employee) {
         DetectNullOrEmptyFields.checkFields(employee);
         String insertQuery = "INSERT INTO employee (first_name, last_name, department_id, job_title, gender, date_of_birth) \n" +
-                "values (?,?,?,?,?::gender_enum_type,?::date);";
+                "values (?,?,?,?,?,?);";
 
         try (Connection con = dataSource.getConnection();
                 PreparedStatement ps = con.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
 
-//            java.sql.Date sqlDate = new java.sql.Date((employee.getBirthDate().getTime()));
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setObject(3, employee.getDepartmentId(), Types.BIGINT);
             ps.setString(4, employee.getJobTitle());
-            ps.setObject(5, employee.getGender().name(), Types.OTHER);
+            if(employee.getGender() == null) {
+                ps.setNull(5, Types.OTHER);
+            } else {
+                ps.setObject(5, employee.getGender().toString(), Types.OTHER);
+            }
             ps.setObject(6, employee.getBirthDate(), Types.DATE);
             if(ps.executeUpdate() != 1)  {
                 con.rollback();
@@ -118,7 +129,11 @@ public class EmployeeDAO implements IDao<Employee> {
                 ps.setString(2, provider.getLastName());
                 ps.setObject(3, provider.getDepartmentId(), Types.BIGINT);
                 ps.setString(4, provider.getJobTitle());
-                ps.setObject(5, provider.getGender().name(), Types.OTHER);
+                if(provider.getGender() == null) {
+                    ps.setNull(5, Types.OTHER);
+                } else {
+                    ps.setObject(5, provider.getGender().toString(), Types.OTHER);
+                }
                 ps.setObject(6, provider.getBirthDate(), Types.DATE);
                 ps.setLong(7, provider.getEmployeeId());
 
