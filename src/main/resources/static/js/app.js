@@ -208,11 +208,11 @@ function createAddEmployeeForm(idElement) {
     element.innerHTML = '<form id="formAddEmployee" class="row g-3"  >\n' +
         '<div class="col-md-4">\n' +
         '    <label for="firstName" class="form-label">First name</label>\n' +
-        '    <input type="text" class="form-control" id="firstName">\n' +
+        '    <input type="text" class="form-control" placeholder="requried" id="firstName">\n' +
         '</div>\n' +
         '<div class="col-md-4">\n' +
         '    <label for="lastName" class="form-label">Last name</label>\n' +
-        '    <input type="text" class="form-control" id="lastName">\n' +
+        '    <input type="text" class="form-control" placeholder="requried" id="lastName">\n' +
         '</div>\n' +
         '<div class="col-md-2">\n' +
         '    <label for="gender" class="form-label">Gender</label>\n' +
@@ -282,11 +282,11 @@ function createUpdateEmployeeForm2(idElement, obj) {
     element.innerHTML = '<form id="formUpdateEmployee" class="row g-3"  >\n' +
         '<div class="col-md-4">\n' +
         '    <label for="firstName" class="form-label">First name</label>\n' +
-        '    <input type="text" class="form-control" id="firstName">\n' +
+        '    <input type="text" class="form-control" placeholder="requried" id="firstName">\n' +
         '</div>\n' +
         '<div class="col-md-4">\n' +
         '    <label for="lastName" class="form-label">Last name</label>\n' +
-        '    <input type="text" class="form-control" id="lastName" >\n' +
+        '    <input type="text" class="form-control" placeholder="requried" id="lastName" >\n' +
         '</div>\n' +
         '<div class="col-md-2">\n' +
         '    <label for="gender" class="form-label">Gender</label>\n' +
