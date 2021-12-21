@@ -48,7 +48,7 @@ public class EmployeeService implements IEmployeeService {
     /**
      * Обновить данные о сотруднике
      * @param provider объект типа Employee
-     * @return обновленный объект типа Employee
+     * @return если объект существует в бд - обновленный объект employee, иначе - EntityNotFoundException
      */
     @Override
     public Employee updateEmployee(Employee provider) {

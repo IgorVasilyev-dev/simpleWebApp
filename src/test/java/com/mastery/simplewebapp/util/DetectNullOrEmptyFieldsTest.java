@@ -22,7 +22,7 @@ class DetectNullOrEmptyFieldsTest {
                     || e.getLastName() == null || e.getLastName().isEmpty();
 
     /**
-     * Тест на проверка полей помеченных @NotNullOrEmptyData на null or empty
+     * Тест для проверки полей помеченных @NotNullOrEmptyData на null or empty
      * Если обязательный поля являются null or empty выбрасывает RuntimeException SQLConstraintException
      * @param employee тестируемый экземпляр класса Employee
      */
@@ -55,6 +55,10 @@ class DetectNullOrEmptyFieldsTest {
         );
     }
 
+    /**
+     * Создать экземпляр Employee и заполнить данными
+     * @return объект Employee
+     */
     private static Employee createTestEmployee(String firstName, String lastName, Long departmentId, Gender gender,
                                         String jobTitle, String birthDate) {
         SimpleDateFormat format = new SimpleDateFormat();
