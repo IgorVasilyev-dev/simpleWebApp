@@ -50,6 +50,10 @@ public class EmployeeRestServletMockMvcIntegrationTest {
     @Autowired
     IDao<Employee> employeeIDao;
 
+    /**
+     * Создать таблицу в БД по sql скрипту
+     * Использовать, только есть Таблица в БД еще не создана
+     */
     @BeforeAll
     public static void createTable(@Autowired DataSource dataSource) {
         try(Connection con =  dataSource.getConnection()){
@@ -60,6 +64,9 @@ public class EmployeeRestServletMockMvcIntegrationTest {
         }
     }
 
+    /**
+     * удалить все записи в БД из таблицы
+     */
     @AfterEach
     public void resetDb() {
         try(Connection con =  dataSource.getConnection();
@@ -246,14 +253,29 @@ public class EmployeeRestServletMockMvcIntegrationTest {
         );
     }
 
+    /**
+     * сохранить объект в БД
+     * @param employee объет типа Employee
+     * @return объект сохраненный в БД
+     */
     private Employee saveEntity(Employee employee) {
         return employeeIDao.addEmployee(employee);
     }
 
+    /**
+     * генерирует случайное число в диапазоне (min:max]
+     * @param max включительно
+     * @param min исключительно
+     * @return случайное число в диапазоне (min:max]
+     */
     private Long randomIdIncludeMax(long max, long min) {
         return (long) ((Math.random()*(max - min) + ++min));
     }
 
+    /**
+     * Создать экземпляр Employee и заполнить данными
+     * @return объект Employee
+     */
     private Employee createTestEmployee(String firstName, String lastName, Long departmentId, Gender gender,
                                         String jobTitle, String birthDate) {
         SimpleDateFormat format = new SimpleDateFormat();

@@ -20,6 +20,12 @@ public class EmployeeDAO implements IDao<Employee> {
         this.dataSource = dataSource;
     }
 
+    /**
+     * Получить объект по Id из Бд
+     * @param id параметр запроса
+     * @return если объект существует в бд - Optional.of(employee), иначе - Optional.empty()
+     * при перехвате SQLException генерируется SQLRuntimeException
+     */
     @Override
     public Optional<Employee> getById(Long id) {
         Optional<Employee> employeeOptional = Optional.empty();
@@ -51,6 +57,11 @@ public class EmployeeDAO implements IDao<Employee> {
         return employeeOptional;
     }
 
+    /**
+     * Получить список из Бд
+     * @return List<Employee>
+     * при перехвате SQLException генерируется SQLRuntimeException
+     */
     @Override
     public List<Employee> getAll() {
         List<Employee> list = new ArrayList<>();
@@ -82,6 +93,12 @@ public class EmployeeDAO implements IDao<Employee> {
         return list;
     }
 
+    /**
+     * Добавить объект типа Employee в БД
+     * @param employee объект типа Employee
+     * @return сохраненный объект employee
+     * при перехвате SQLException генерируется SQLRuntimeException
+     */
     @Override
     public Employee addEmployee(Employee employee) {
         DetectNullOrEmptyFields.checkFields(employee);
@@ -117,6 +134,12 @@ public class EmployeeDAO implements IDao<Employee> {
         return employee;
     }
 
+    /**
+     * Обновить объект в БД
+     * @param provider объект типа Employee
+     * @return если объект существует в бд - Optional.of(employee), иначе - Optional.empty()
+     * при перехвате SQLException генерируется SQLRuntimeException
+     */
     @Override
     public Optional<Employee> updateEmployee(Employee provider) {
         DetectNullOrEmptyFields.checkFields(provider);
@@ -149,6 +172,11 @@ public class EmployeeDAO implements IDao<Employee> {
         return Optional.of(provider);
     }
 
+    /**
+     * Удалить объект из БД
+     * @param id параметр запроса
+     * при перехвате SQLException генерируется SQLRuntimeException
+     */
     @Override
     public void deleteEmployee(Long id) {
         String selectByIdQuery = "DELETE FROM employee WHERE employee_id = ?";

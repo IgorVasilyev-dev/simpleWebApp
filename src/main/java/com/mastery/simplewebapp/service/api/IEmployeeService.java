@@ -13,7 +13,7 @@ public interface IEmployeeService {
     List<Employee> getAll();
 
     /**
-     * Получить пострудника по id
+     * Получить сотрудника по id
      * @param id идентификатор сущности
      * @return объект типа Employee
      */
