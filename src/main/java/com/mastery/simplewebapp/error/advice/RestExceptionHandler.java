@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
-
+/**
+ * Класс для перехвата Exception на контроллере и обработки их
+ */
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -41,12 +43,5 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(new ApiError(HttpStatus.NOT_FOUND,
                 "Not Found Entity", exception.getMessage()));
     }
-
-//    @ExceptionHandler(value = EntityExistsException.class)
-//    protected ResponseEntity<?> handlerEntityExistsException(EntityExistsException exception) {
-//        return ResponseEntity.badRequest().body(new ApiError(HttpStatus.BAD_REQUEST,
-//                "Entity Already Exists", exception.getMessage()));
-//    }
-
 
 }

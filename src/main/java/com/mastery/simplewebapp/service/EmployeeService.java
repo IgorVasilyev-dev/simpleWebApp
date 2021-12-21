@@ -18,17 +18,31 @@ public class EmployeeService implements IEmployeeService {
         this.repository = repository;
     }
 
+    /**
+     * Получить список всех Employee
+     * @return List<Employee>
+     */
     @Override
     public List<Employee> getAll() {
         return this.repository.findAll();
     }
 
+    /**
+     * Получить сотрудника по id
+     * @param id идентификатор сущности
+     * @return если объект есть в бд - объект типа Employee, иначе EntityNotFoundException
+     */
     @Override
     public Employee getById(Long id) {
         return this.repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("entity with 'id = " + id + "' is not found"));
     }
 
+    /**
+     * добавить сотрудника
+     * @param employee объект типа Employee
+     * @return сохраненный объект типа Employee
+     */
     @Transactional
     @Override
     public Employee addEmployee(Employee employee) {
@@ -36,6 +50,11 @@ public class EmployeeService implements IEmployeeService {
         return this.repository.save(employee);
     }
 
+    /**
+     * Обновить данные о сотруднике
+     * @param provider объект типа Employee
+     * @return если объект существует в бд - обновленный объект типа Employee, иначе - EntityNotFoundException
+     */
     @Transactional
     @Override
     public Employee updateEmployee(Employee provider) {
@@ -45,6 +64,11 @@ public class EmployeeService implements IEmployeeService {
         return this.repository.save(provider);
     }
 
+    /**
+     * Удалить сотрудника
+     * @param id идентификатор employee
+     * @return если объект существует в бд - удаленный объект employee, иначе - EntityNotFoundException
+     */
     @Transactional
     @Override
     public Employee deleteEmployed(Long id) {

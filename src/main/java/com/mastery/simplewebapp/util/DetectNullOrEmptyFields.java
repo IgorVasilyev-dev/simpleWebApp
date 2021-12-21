@@ -5,8 +5,17 @@ import com.mastery.simplewebapp.util.annotahion.NotNullOrEmptyData;
 
 import java.lang.reflect.Field;
 
+/**
+ * класс идентифицирует поля помеченные аннотацией @NotNullOrEmptyData
+ * и проверяет поля на null и empty
+ */
 public class DetectNullOrEmptyFields {
 
+    /**
+     * Метод считывает поля помеченные аннотацией @NotNullOrEmptyData
+     * и генерирует SQLConstraintException, если эти поля являются null or empty
+     * @param t экземпляр класса
+     */
     public static <T> void checkFields(T t) {
 
         if (t != null) {

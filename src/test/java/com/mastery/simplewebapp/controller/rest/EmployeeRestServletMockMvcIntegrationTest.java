@@ -3,7 +3,6 @@ package com.mastery.simplewebapp.controller.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mastery.simplewebapp.dto.Employee;
 import com.mastery.simplewebapp.dto.Enum.Gender;
-import com.mastery.simplewebapp.service.api.IEmployeeService;
 import com.mastery.simplewebapp.storage.api.IEmployeeRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -37,11 +36,11 @@ class EmployeeRestServletMockMvcIntegrationTest {
     private MockMvc mockMvc;
 
     @Autowired
-    IEmployeeService lordView;
-
-    @Autowired
     IEmployeeRepository repository;
 
+    /**
+     * удалить все записи в БД из таблицы
+     */
     @AfterEach
     public void resetDb() {
         repository.deleteAll();
@@ -221,14 +220,29 @@ class EmployeeRestServletMockMvcIntegrationTest {
         );
     }
 
+    /**
+     * сохранить объект в БД
+     * @param employee объект типа Employee
+     * @return объект сохраненный в БД
+     */
     private Employee saveEntity(Employee employee) {
         return repository.save(employee);
     }
 
+    /**
+     * генерирует случайное число в диапазоне (min:max]
+     * @param max включительно
+     * @param min исключительно
+     * @return случайное число в диапазоне (min:max]
+     */
     private Long randomIdIncludeMax(long max, long min) {
         return (long) ((Math.random()*(max - min) + ++min));
     }
 
+    /**
+     * Создать экземпляр Employee и заполнить данными
+     * @return объект Employee
+     */
     private Employee createTestEmployee(String firstName, String lastName, Long departmentId, Gender gender,
                                         String jobTitle, String birthDate) {
         SimpleDateFormat format = new SimpleDateFormat();
